@@ -1,0 +1,13 @@
+check-my-diary
+cmd-api
+csr-api
+manage-soc-cases
+manage-soc-cases-api
+categorisation-tool
+offender-risk-profiler
+pathfinder
+pathfinder-api
+hmpps-pin-phone-monitor
+hmpps-pin-phone-monitor-api
+manage-intelligence
+manage-intelligence-api
