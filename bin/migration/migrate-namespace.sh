@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 # This script depends on the following
 # - git installed and configured
