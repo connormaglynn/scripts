@@ -62,7 +62,7 @@ echo $LINE
 # Connect to the port-forward-pod. Keep reconnecting (due to timeouts) until the user decides to stop re-connecting
 echo "5. Connect to port-forward-pod in [ $NAMESPACE ]"
 condition=r
-while [ "$condition" == "r" ]
+while [ "$condition" = "r" ]
 do
   echo "- Connecting to port-forward-pod..."
   echo "- Press [ CTRL+C ] to manually exit the connection..."
