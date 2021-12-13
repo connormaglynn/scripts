@@ -7,7 +7,7 @@ categorisation-tool
 offender-risk-profiler
 pathfinder
 pathfinder-api
-hmpps-pin-phone-monitor
-hmpps-pin-phone-monitor-api
+hmpps-prisoner-communication-monitoring
+hmpps-prisoner-communication-monitoring-api
 manage-intelligence
 manage-intelligence-api
