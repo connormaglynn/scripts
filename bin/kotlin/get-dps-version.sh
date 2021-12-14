@@ -10,7 +10,7 @@ do
 
     echo processing: ${file}
     {
-      cd ~/git/$file
+      cd ~/git/"$file"
       git stash
       git checkout main
       git pull
@@ -24,6 +24,8 @@ do
       GRADLE_FILE=build.gradle
     fi
 
-    echo $file >> ~/Desktop/versions.txt
+    echo "$file" >> ~/Desktop/versions.txt
     cat ./$GRADLE_FILE | grep uk.gov.justice.hmpps.gradle-spring-boot >> ~/Desktop/versions.txt
 done
+
+cat ~/Desktop/versions.txt

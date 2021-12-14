@@ -1,11 +1,11 @@
 #!/bin/bash
-TICKET="PAT-2114"
+TICKET="DCS-1362"
 VERSION="3.3.15"
 BRANCH_NAME="$TICKET-bump-gradle-spring-boot-version"
 COMMIT_MESSAGE="⬆️ $TICKET: Bump gradle-spring-boot version to $VERSION"
 
 set -eu
-for file in $(cat ~/git/scripts/services/kotlin/soct.txt);
+for file in $(cat ~/git/scripts/services/kotlin/dps-shared.txt);
 do
   {
     cd ~/git/"$file"
