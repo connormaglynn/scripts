@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-for file in $(cat ~/git/scripts/services/all/holding.txt);
+for file in $(cat ~/git/scripts/services/kotlin/soct.txt);
 do
     cd ~/git
     if [ ! -d "$HOME/git/$file" ]
