@@ -1,11 +1,12 @@
 #!/bin/bash
-TICKET="DCS-1362"
-VERSION="3.3.15"
+LOG_FILE=~/Desktop/prs-created.txt
+TICKET="PAT-2115"
+VERSION="3.3.16"
 BRANCH_NAME="$TICKET-bump-gradle-spring-boot-version"
 COMMIT_MESSAGE="⬆️ $TICKET: Bump gradle-spring-boot version to $VERSION"
 
 set -eu
-for file in $(cat ~/git/scripts/services/kotlin/dps-shared.txt);
+for file in $(cat ~/git/scripts/services/kotlin/soct.txt);
 do
   {
     cd ~/git/"$file"
@@ -28,7 +29,9 @@ do
 
     echo "Creating PR for changes for  $file"
     git push --set-upstream origin $BRANCH_NAME &> /dev/null
-    gh pr create --title "$COMMIT_MESSAGE" --body "$COMMIT_MESSAGE" >> ~/Desktop/prs-created.txt
+    gh pr create --title "$COMMIT_MESSAGE" --body "$COMMIT_MESSAGE" >> $LOG_FILE
 
     echo "---------------------------------------------------------------"
 done
+
+cat $LOG_FILE

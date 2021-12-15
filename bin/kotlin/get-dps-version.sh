@@ -1,5 +1,8 @@
 #!/bin/bash
+LOG_FILE=~/Desktop/versions.txt
 set -e
+
+rm $LOG_FILE
 for file in $(cat ~/git/scripts/services/kotlin/soct.txt);
 do
     cd ~/git
@@ -25,7 +28,8 @@ do
     fi
 
     echo "$file" >> ~/Desktop/versions.txt
-    cat ./$GRADLE_FILE | grep uk.gov.justice.hmpps.gradle-spring-boot >> ~/Desktop/versions.txt
+    cat ./$GRADLE_FILE | grep uk.gov.justice.hmpps.gradle-spring-boot >> $LOG_FILE
 done
 
-cat ~/Desktop/versions.txt
+cat $LOG_FILE
+rm $LOG_FILE
