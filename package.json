@@ -1,0 +1,22 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "useful scripts",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx shellcheck ./bin/**/*.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/connormaglynn/scripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/connormaglynn/scripts/issues"
+  },
+  "homepage": "https://github.com/connormaglynn/scripts#readme",
+  "devDependencies": {
+    "shellcheck": "^1.1.0"
+  }
+}

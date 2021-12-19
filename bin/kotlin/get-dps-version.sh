@@ -1,35 +1,37 @@
 #!/bin/bash
+FILE=${1-kotlin services}
+
 LOG_FILE=~/Desktop/versions.txt
+
 set -e
 
-rm $LOG_FILE
-for file in $(cat ~/git/scripts/services/kotlin/soct.txt);
+while read -r line;
 do
     cd ~/git
-    if [ ! -d "$HOME/git/$file" ]
+    if [ ! -d "$HOME/git/$line" ]
     then
-        git clone "https://github.com/ministryofjustice/$file.git" &> /dev/null
+        git clone "https://github.com/ministryofjustice/$line.git" &> /dev/null
     fi
 
-    echo processing: ${file}
+    echo processing: "$line"
     {
-      cd ~/git/"$file"
+      cd ~/git/"$line"
       git stash
       git checkout main
       git pull
     } &> /dev/null
 
-    # determine kotlin or java build file
-    if test -f "$HOME/git/$file/build.gradle.kts"
+    # determine kotlin or java build line
+    if test -f "$HOME/git/$line/build.gradle.kts"
     then
       GRADLE_FILE=build.gradle.kts
     else
       GRADLE_FILE=build.gradle
     fi
 
-    echo "$file" >> ~/Desktop/versions.txt
-    cat ./$GRADLE_FILE | grep uk.gov.justice.hmpps.gradle-spring-boot >> $LOG_FILE
-done
+    echo "$line" >> ~/Desktop/versions.txt
+    grep uk.gov.justice.hmpps.gradle-spring-boot >> $LOG_FILE < ./$GRADLE_FILE
+done < "$FILE"
 
 cat $LOG_FILE
 rm $LOG_FILE
