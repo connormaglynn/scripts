@@ -4,7 +4,8 @@
   "description": "useful scripts",
   "main": "index.js",
   "scripts": {
-    "lint": "npx shellcheck ./bin/**/*.sh"
+    "prepare": "husky install",
+    "lint": "npx shellcheck ./bin/**/*.sh && detect-secrets-launcher bin/*"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,13 @@
   },
   "homepage": "https://github.com/connormaglynn/scripts#readme",
   "devDependencies": {
+    "detect-secrets": "^1.0.6",
+    "husky": "^7.0.4",
     "shellcheck": "^1.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
