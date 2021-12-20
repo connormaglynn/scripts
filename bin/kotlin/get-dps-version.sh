@@ -1,5 +1,7 @@
 #!/bin/bash
-FILE=${1-kotlin services}
+KOTLIN_SERVICES=${1-kotlin services}
+
+FILE="/Users/connorglynn/git/scripts/services/kotlin/$KOTLIN_SERVICES.txt"
 
 LOG_FILE=~/Desktop/versions.txt
 
