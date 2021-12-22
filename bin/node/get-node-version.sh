@@ -5,7 +5,9 @@
 # - jq
 # - git
 
-FILE=~/git/scripts/services/node/soct.txt
+SERVICES=${1:?"missing arg 1 for SERVICES"}
+
+FILE=~/git/scripts/services/node/$SERVICES.txt
 
 set -eu
 
