@@ -1,12 +1,22 @@
 #!/bin/bash
+# Check all parameters are passed in
+if [ $# -eq 0  ]
+then
+  echo $LINE
+  echo "- Please call the script as 'update-dps-version.sh {ticket} {version} {services}'"
+  echo $LINE
+  exit 1
+fi
+
 LOG_FILE=~/Desktop/prs-created.txt
-TICKET="PAT-2115"
-VERSION="3.3.16"
+TICKET=${1:?"missing arg 1 for TICKET"}
+VERSION=${2:?"missing arg 2 for VERSION"}
+SERVICES=${3:?"missing arg 3 for SERVICES"}
 BRANCH_NAME="$TICKET-bump-gradle-spring-boot-version"
 COMMIT_MESSAGE="⬆️ $TICKET: Bump gradle-spring-boot version to $VERSION"
 
 set -eu
-for file in $(cat ~/git/scripts/services/kotlin/soct.txt);
+for file in $(cat ~/git/scripts/services/kotlin/$SERVICES.txt);
 do
   {
     cd ~/git/"$file"
