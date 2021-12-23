@@ -3,8 +3,6 @@ KOTLIN_SERVICES=${1-kotlin services}
 
 FILE="/Users/connorglynn/git/scripts/services/kotlin/$KOTLIN_SERVICES.txt"
 
-LOG_FILE=~/Desktop/versions.txt
-
 set -e
 
 while read -r line;
@@ -15,7 +13,7 @@ do
         git clone "https://github.com/ministryofjustice/$line.git" &> /dev/null
     fi
 
-    echo processing: "$line"
+    echo "$line"
     {
       cd ~/git/"$line"
       git stash
@@ -32,8 +30,7 @@ do
     fi
 
     echo "$line" >> ~/Desktop/versions.txt
-    grep uk.gov.justice.hmpps.gradle-spring-boot >> $LOG_FILE < ./$GRADLE_FILE
-done < "$FILE"
+    grep uk.gov.justice.hmpps.gradle-spring-boot < ./$GRADLE_FILE
 
-cat $LOG_FILE
-rm $LOG_FILE
+    echo "---------------------------------------------------------------"
+done < "$FILE"
