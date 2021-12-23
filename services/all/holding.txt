@@ -1,8 +1,1 @@
-keyworker-api
-whereabouts-api
-dps-data-compliance
-offender-assessments-api-kotlin
-hmpps-manage-adjudications-api
-prisoner-transactions-api
-hmpps-tier
-hmpps-tier-to-delius-update
+hmpps-welcome-people-into-prison-ui

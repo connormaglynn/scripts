@@ -1,7 +1,14 @@
 manage-soc-cases
+manage-soc-cases-api
 pathfinder
+pathfinder-api
 check-my-diary
+cmd-api
+csr-api
 offender-categorisation
+offender-risk-profiler
 hmpps-prisoner-communication-monitoring
+hmpps-prisoner-communication-monitoring-api
 manage-intelligence
 hmpps-submit-information-report
+manage-intelligence-api
