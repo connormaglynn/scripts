@@ -11,6 +11,7 @@ echo PATH='~/git/scripts/bin/git:${PATH}' >> $SHELL_FILE
 echo PATH='~/git/scripts/bin/kubernetes:${PATH}' >> $SHELL_FILE
 echo PATH='~/git/scripts/bin/node:${PATH}' >>$SHELL_FILE
 echo PATH='~/git/scripts/bin/auth:${PATH}' >>$SHELL_FILE
+echo PATH='~/git/scripts/bin/circle:${PATH}' >>$SHELL_FILE
 echo 'export PATH' >> $SHELL_FILE
 echo '#--- scripts installation ---' >> $SHELL_FILE
 
