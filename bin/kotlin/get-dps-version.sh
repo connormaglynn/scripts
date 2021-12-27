@@ -18,7 +18,6 @@ do
     GRADLE_FILE=build.gradle
   fi
 
-  echo "$line" >> ~/Desktop/versions.txt
   grep uk.gov.justice.hmpps.gradle-spring-boot < ./$GRADLE_FILE
 
   echo "---------------------------------------------------------------"
