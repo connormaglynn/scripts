@@ -7,30 +7,19 @@ set -e
 
 while read -r line;
 do
-    cd ~/git
-    if [ ! -d "$HOME/git/$line" ]
-    then
-        git clone "https://github.com/ministryofjustice/$line.git" &> /dev/null
-    fi
+  source git-checkout-clean-main.sh "$line"
 
-    echo "$line"
-    {
-      cd ~/git/"$line"
-      git stash
-      git checkout main
-      git pull
-    } &> /dev/null
+  echo "$line"
+  # determine kotlin or java build line
+  if test -f "$HOME/git/$line/build.gradle.kts"
+  then
+    GRADLE_FILE=build.gradle.kts
+  else
+    GRADLE_FILE=build.gradle
+  fi
 
-    # determine kotlin or java build line
-    if test -f "$HOME/git/$line/build.gradle.kts"
-    then
-      GRADLE_FILE=build.gradle.kts
-    else
-      GRADLE_FILE=build.gradle
-    fi
+  echo "$line" >> ~/Desktop/versions.txt
+  grep uk.gov.justice.hmpps.gradle-spring-boot < ./$GRADLE_FILE
 
-    echo "$line" >> ~/Desktop/versions.txt
-    grep uk.gov.justice.hmpps.gradle-spring-boot < ./$GRADLE_FILE
-
-    echo "---------------------------------------------------------------"
+  echo "---------------------------------------------------------------"
 done < "$FILE"

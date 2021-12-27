@@ -13,18 +13,7 @@ set -eu
 
 while read -r line; do
 
-  cd ~/git
-  if [ ! -d "$HOME/git/$line" ]
-  then
-      git clone "https://github.com/ministryofjustice/$line.git" &> /dev/null
-  fi
-
-  {
-    cd ~/git/"$line"
-    git stash
-    git checkout main
-    git pull
-  } &> /dev/null
+  source git-checkout-clean-main.sh "$line"
 
   echo "$line"
   DOCKERFILE=$(grep "FROM node:" < ./Dockerfile)

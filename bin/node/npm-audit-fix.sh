@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# This script depends on the folliwing
-# - git installed and configured
-# - gh installed and configured
+# This script depends on the following
+# - git
+# - gh
 # - cloud-platform-environments repo existing in '~/git/cloud-platform-environments'
 # - BRANCH_NAME & COMMIT_MESSAGE will probably need to have a new ticket number for another migration
 # 
