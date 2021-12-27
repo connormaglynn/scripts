@@ -18,7 +18,6 @@ do
     GRADLE_FILE=build.gradle
   fi
 
-  echo "$line" >> ~/Desktop/versions.txt
   grep "kotlin(\"plugin.spring\")" < ./$GRADLE_FILE
   echo "---------------------------------------------------------------"
 done < "$FILE"
