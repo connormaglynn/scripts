@@ -1,9 +1,9 @@
 #!/bin/bash
+set -e
+
 KOTLIN_SERVICES=${1-kotlin services}
 
 FILE="/Users/connorglynn/git/scripts/services/kotlin/$KOTLIN_SERVICES.txt"
-
-set -e
 
 while read -r line;
 do
