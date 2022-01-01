@@ -14,26 +14,19 @@ BRANCH_NAME="$TICKET-fix-security-vulnerability"
 MESSAGE="Fix Json Schema Security Vulnerability"
 
 FILE=~/git/scripts/services/node/$SERVICES.txt
-LOG_FILE=~/Desktop/npm-audit.txt
 
 while read -r line; do
   source git-checkout-clean-main.sh "$line"
 
   echo "$line"
+  echo "Before:"
+  better-npm-audit audit || :
 
-  echo "$line" >> $LOG_FILE
-  echo "Before:" >> $LOG_FILE
-  better-npm-audit audit || true >> $LOG_FILE
+  echo -e "\nRunning npm audit fix\n"
+  npm audit fix &> /dev/null || :
 
-  echo "Running npm audit fix"
-  {
-    npm audit fix || true
-  } &> /dev/null
-
-  echo "After:" >> $LOG_FILE
-  better-npm-audit audit || true >> $LOG_FILE
-  echo "---------------------------------------------------------------" >> $LOG_FILE
-
+  echo "After:"
+  better-npm-audit audit || :
 
   source git-commit-to-branch.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$COMMIT"
   source git-create-pr.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$PR"

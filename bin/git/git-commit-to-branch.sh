@@ -11,10 +11,10 @@ COMMIT_MESSAGE="🤖 $TICKET: $MESSAGE"
 {
   ./gradlew || npm install
 } &> /dev/null
-git --no-pager diff
 
 if $EXECUTE
 then
+  git --no-pager diff
   echo "Committing changes..."
   {
     git branch -D "$BRANCH_NAME" || git checkout -b "$BRANCH_NAME"
@@ -23,5 +23,7 @@ then
     git commit -m "$COMMIT_MESSAGE"
   } &> /dev/null
 else
+  echo -e "\nChanges:"
+  git status -s || echo "  No changes"
   echo "Not committing changes..."
 fi
