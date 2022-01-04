@@ -15,7 +15,7 @@ while read -r line; do
   source git-checkout-clean-main.sh "$line"
 
   echo "$line"
-  npm audit || true
+  better-npm-audit audit || true
 
   echo "---------------------------------------------------------------"
 done < "$FILE"
