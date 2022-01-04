@@ -11,7 +11,7 @@ COMMIT=${3:-false}
 PR=${4:-false}
 
 BRANCH_NAME="$TICKET-fix-security-vulnerability"
-MESSAGE="Fix Json Schema Security Vulnerability"
+MESSAGE="Fix Security Vulnerabilities"
 
 FILE=~/git/scripts/services/node/$SERVICES.txt
 
