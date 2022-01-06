@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -eu
 # This script depends on the following
 # - git installed and configured
 # - gh installed and configured
@@ -10,39 +10,31 @@
 #     manage-soc-cases-dev
 #     licences-dev
 
+TICKET=${1:?"missing arg 2 for TICKET"}
+SERVICES=${2:?"missing arg 2 for SERVICES"}
+COMMIT=${3:-false}
+PR=${4:-false}
 
-set -e
-NAMESPACEFILE_FILE=${1-namespaces}
+FILE=~/git/scripts/namespaces/all/$SERVICES.txt
 
-for namespace in $(cat "$NAMESPACEFILE_FILE"); do
-  BRANCH_NAME="DCS-1333_migrate_${namespace}_to_live"
-  COMMIT_MESSAGE="DCS-1333: migrate $namespace to live"
+source git-checkout-clean-main.sh "cloud-platform-environments"
+while read -r line; do
+  BRANCH_NAME="${TICKET}_migrate_${line}_to_live"
+  MESSAGE="Migrate $line to live"
 
-  echo "Stashing any changes"
-  git stash
+  echo "$line"
+  {
+    git stash
+    git checkout main
+    git pull
+    cd ~/git/cloud-platform-environments/namespaces/live-1.cloud-platform.service.justice.gov.uk/"$line"
+  } &> /dev/null
 
-  echo "Starting migration for $namespace"
-  cd ~/git/cloud-platform-environments/namespaces/live-1.cloud-platform.service.justice.gov.uk/$namespace
+  cloud-platform environment migrate
+  sleep 2
 
-  echo "Checking out main"
-  git checkout main
-
-  echo "Pulling main"
-  git pull
-
-  echo "Checking out a branch for $namespace"
-  git checkout -b $BRANCH_NAME
-
-  echo "Migrating $namespace"
-  cloud-platform environment migrate >> ~/Desktop/migration-output.txt
-
-  echo "Comitting changes for  $namespace"
-  git add -A
-  git commit -m "$COMMIT_MESSAGE"
-
-  echo "Creating PR for changes for  $namespace"
-  git push --set-upstream origin $BRANCH_NAME
-  gh pr create --title "$COMMIT_MESSAGE" --body "$COMMIT_MESSAGE"
+  source git-commit-to-branch.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$COMMIT"
+  source git-create-pr.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$PR"
 
   echo "---------------------------------------------------------------"
-done
+done < "$FILE"

@@ -8,17 +8,18 @@ EXECUTE=${4:-false}
 
 COMMIT_MESSAGE="🤖 $TICKET: $MESSAGE"
 
-{
-  ./gradlew || npm install
-} &> /dev/null
+# not all repos use gradle or npm, npm will always run and create a package-lock file
+# need to check before running these commands
+#{
+#  ./gradlew || npm install || :
+#} &> /dev/null
 
 if $EXECUTE
 then
   git --no-pager diff
   echo "Committing changes..."
   {
-    git branch -D "$BRANCH_NAME" || git checkout -b "$BRANCH_NAME"
-    git checkout -b "$BRANCH_NAME"
+    (git branch -D "$BRANCH_NAME" && git checkout -b "$BRANCH_NAME") || git checkout -b "$BRANCH_NAME"
     git add -A
     git commit -m "$COMMIT_MESSAGE"
   } &> /dev/null
