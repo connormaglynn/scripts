@@ -1,17 +1,17 @@
 #!/bin/bash
-set -e
-from_context=live-1.cloud-platform.service.justice.gov.uk
-namespace=${1?No namespace specified}
-to_context=live.cloud-platform.service.justice.gov.uk
+set -eu
+NAMESPACE=${1?No NAMESPACE specified}
+SECRETS_FILE=~/git/scripts/secrets/secrets.txt
 
-SECRETS_FILE=${2-secrets}
+FROM_CONTEXT=live-1.cloud-platform.service.justice.gov.uk
+TO_CONTEXT=live.cloud-platform.service.justice.gov.uk
 
-for secret in $(cat "$SECRETS_FILE"); do
-  echo "Processing $secret"
+while read -r line; do
+  echo "Processing $line"
 
-  kubectl --context $from_context -n "$namespace" get secret "$secret" -ojson | jq -r '. | {apiVersion, kind, metadata, data, type} | del(.metadata.annotations."kubectl.kubernetes.io/last-applied-configuration", .metadata.namespace, .metadata.creationTimestamp, .metadata.resourceVersion, .metadata.selfLink, .metadata.uid)' | kubectl --context $to_context -n $namespace create -f -
-
+  kubectl --context $FROM_CONTEXT -n "$NAMESPACE" get secret "$line" -ojson | jq -r '. | {apiVersion, kind, metadata, data, type} | del(.metadata.annotations."kubectl.kubernetes.io/last-applied-configuration", .metadata.namespace, .metadata.creationTimestamp, .metadata.resourceVersion, .metadata.selfLink, .metadata.uid)' | kubectl --context $TO_CONTEXT -n $NAMESPACE create -f -
   echo "done copy"
+  kubectl --context $TO_CONTEXT -n "$NAMESPACE" get secret "$line"
 
-  kubectl --context $to_context -n "$namespace" get secret "$secret"
-done
+  echo "----------------------------------"
+done < "$SECRETS_FILE"
