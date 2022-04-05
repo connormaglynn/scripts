@@ -6,7 +6,7 @@ MESSAGE=${2:?"missing arg 2 for MESSAGE"}
 BRANCH_NAME=${3:?"missing arg 3 for BRANCH_NAME"}
 EXECUTE=${4:-false}
 
-COMMIT_MESSAGE="🤖 $TICKET: $MESSAGE"
+COMMIT_MESSAGE="$TICKET: 🤖 $MESSAGE"
 LOG_FILE=~/Desktop/prs-created.txt
 
 if $EXECUTE
