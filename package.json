@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "lint": "npx shellcheck ./bin/**/*.sh && detect-secrets-launcher bin/*"
+    "lint": "shellcheck ./bin/**/*.sh && detect-secrets-launcher bin/*"
   },
   "repository": {
     "type": "git",
