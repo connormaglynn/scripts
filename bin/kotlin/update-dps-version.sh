@@ -17,6 +17,8 @@ do
   echo "updating $line to version $VERSION"
   sed -i "" "s/.*uk.gov.justice.hmpps.gradle-spring-boot.*/  id(\"uk.gov.justice.hmpps.gradle-spring-boot\") version \"$VERSION\"/" ./build.gradle.kts
 
+  ./gradlew clean build
+
   source git-commit-to-branch.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$COMMIT"
   source git-create-pr.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$PR"
 

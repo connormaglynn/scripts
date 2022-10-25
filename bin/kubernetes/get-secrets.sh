@@ -12,4 +12,4 @@ fi
 secret=$1
 namespace=$2
 
-kubectl -n $namespace get secret $secret -o json | jq '.data | map_values(@base64d)' 
+kubectl -n "$namespace" get secret "$secret" -o json | jq '.data | map_values(@base64d)'
