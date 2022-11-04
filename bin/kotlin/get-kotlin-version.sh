@@ -1,7 +1,7 @@
 #!/bin/bash
 KOTLIN_SERVICES=${1-kotlin services}
 
-FILE="/Users/connorglynn/git/scripts/services/kotlin/$KOTLIN_SERVICES.txt"
+FILE=~/git/scripts/services/kotlin/$KOTLIN_SERVICES.txt
 
 set -eu
 
