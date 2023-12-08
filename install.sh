@@ -14,6 +14,7 @@ echo PATH='~/git/scripts/bin/auth:${PATH}' >>$SHELL_FILE
 echo PATH='~/git/scripts/bin/circle:${PATH}' >>$SHELL_FILE
 echo PATH='~/git/scripts/bin/sqs:${PATH}' >>$SHELL_FILE
 echo PATH='~/git/scripts/bin/dns:${PATH}' >>$SHELL_FILE
+echo PATH='~/git/scripts/bin/python:${PATH}' >>$SHELL_FILE
 echo 'export PATH' >> $SHELL_FILE
 echo '#--- scripts installation ---' >> $SHELL_FILE
 
