@@ -2,3 +2,4 @@
 !.idea/runConfigurations/
 /node_modules/
 .husky
+.DS_Store
