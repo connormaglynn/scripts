@@ -7,15 +7,23 @@ set -e
 
 REPO=${1:?"missing arg 1 for REPO"}
 
-cd "$HOME"/git
-if [ ! -d "$HOME/git/$REPO" ]
-then
-    git clone "https://github.com/ministryofjustice/$REPO.git" &> /dev/null
+DIR="${TMPDIR}git"
+
+# if no temp git directory, create it
+if [ ! -d "${DIR}" ]; then
+  mkdir $DIR
+fi
+
+cd ${DIR}
+
+# if no temp repo directory, clone i
+if [ ! -d "${DIR}/${REPO}" ]; then
+  git clone "https://github.com/ministryofjustice/${REPO}.git" &>/dev/null
 fi
 
 {
-  cd ~/git/"$REPO"
+  cd "${DIR}/${REPO}"
   git stash
   git checkout main || git checkout master
   git pull
-} &> /dev/null
+} &>/dev/null

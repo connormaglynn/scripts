@@ -1,21 +1,20 @@
 #!/bin/bash
 set -e
 
-TICKET=${1:?"missing arg 1 for TICKET"}
-MESSAGE=${2:?"missing arg 2 for MESSAGE"}
-BRANCH_NAME=${3:?"missing arg 3 for BRANCH_NAME"}
-EXECUTE=${4:-false}
+MESSAGE=${1:?"missing arg 1 for MESSAGE"}
+BRANCH_NAME=${2:?"missing arg 2 for BRANCH_NAME"}
+EXECUTE=${3:-false}
 
-COMMIT_MESSAGE="$TICKET: 🤖 $MESSAGE"
-LOG_FILE=~/Desktop/prs-created.txt
+COMMIT_MESSAGE="🤖 $MESSAGE"
+LOG_FILE="${TMPDIR}prs-created.txt"
 
-if $EXECUTE
-then
+if $EXECUTE; then
   echo "Creating PR..."
   {
-    git push --set-upstream origin "$BRANCH_NAME" &> /dev/null
-    gh pr create --title "$COMMIT_MESSAGE" --body "$COMMIT_MESSAGE" >> $LOG_FILE
-  } &> /dev/null
+    git push --set-upstream origin "$BRANCH_NAME" &>/dev/null
+    gh pr create --title "$COMMIT_MESSAGE" --body "$COMMIT_MESSAGE" >>$LOG_FILE
+  } &>/dev/null
+  cat "${LOG_FILE}"
 else
   echo "Not creating PR..."
 fi
