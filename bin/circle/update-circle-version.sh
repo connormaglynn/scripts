@@ -12,7 +12,7 @@ PR=${5:-false}
 
 BRANCH_NAME="$TICKET-update-hmmps-circle-orb-version-to-$VERSION"
 MESSAGE="⬆️ $TICKET: update hmpps-circle-orb version to $VERSION"
-FILE=~/git/scripts/services/all/$SERVICES.txt
+FILE=~/git/scripts/services_files/all/$SERVICES.txt
 
 while read -r line; do
   source git-checkout-clean-main.sh "$line"
@@ -24,4 +24,4 @@ while read -r line; do
   source git-create-pr.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$PR"
 
   echo "---------------------------------------------------------------"
-done < "$FILE"
+done <"$FILE"

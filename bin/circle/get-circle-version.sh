@@ -6,7 +6,7 @@
 
 SERVICES=${1:?"missing arg 1 for SERVICES"}
 
-FILE=~/git/scripts/services/all/$SERVICES.txt
+FILE=~/git/scripts/services_files/all/$SERVICES.txt
 
 set -eu
 

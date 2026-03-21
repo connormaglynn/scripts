@@ -7,7 +7,7 @@
 
 SERVICES=${1:?"missing arg 1 for SERVICES"}
 
-FILE=~/git/scripts/services/kotlin/$SERVICES.txt
+FILE=~/git/scripts/services_files/kotlin/$SERVICES.txt
 
 set -eu
 

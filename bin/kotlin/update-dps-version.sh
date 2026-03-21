@@ -31,4 +31,4 @@ do
   source git-create-pr.sh "$TICKET" "$MESSAGE" "$BRANCH_NAME" "$PR"
 
   echo "---------------------------------------------------------------"
-done < ~/git/scripts/services/kotlin/"$SERVICES".txt
+done < ~/git/scripts/services_files/kotlin/"$SERVICES".txt

@@ -10,7 +10,7 @@ VERSION=16
 DOCKERVERSION=16.13-bullseye
 CIRCLEVERSION=16.13-browsers
 
-FILE=~/git/scripts/services/node/$SERVICES.txt
+FILE=~/git/scripts/services_files/node/$SERVICES.txt
 
 set -eu
 
