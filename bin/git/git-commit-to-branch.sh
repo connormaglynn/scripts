@@ -19,7 +19,7 @@ if $EXECUTE; then
   {
     (git branch -D "$BRANCH_NAME" && git checkout -b "$BRANCH_NAME") || git checkout -b "$BRANCH_NAME"
     git add -A
-    git commit -m "$COMMIT_MESSAGE"
+    git commit -m "$COMMIT_MESSAGE" || :
   } &>/dev/null
 else
   echo -e "\nChanges:"

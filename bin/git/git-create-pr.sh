@@ -11,8 +11,8 @@ LOG_FILE="${TMPDIR}prs-created.txt"
 if $EXECUTE; then
   echo "Creating PR..."
   {
-    git push --set-upstream origin "$BRANCH_NAME" &>/dev/null
-    gh pr create --title "$COMMIT_MESSAGE" --body "$COMMIT_MESSAGE" >>$LOG_FILE
+    git push --set-upstream origin "$BRANCH_NAME" &>/dev/null || :
+    gh pr create --title "$COMMIT_MESSAGE" --body "$COMMIT_MESSAGE" >>$LOG_FILE || :
   } &>/dev/null
   cat "${LOG_FILE}"
 else

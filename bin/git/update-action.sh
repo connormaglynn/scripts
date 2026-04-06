@@ -2,15 +2,19 @@
 
 set -eu
 
-ACTION=${1:?"missing arg 2 for ACTION"}
-NEW_SHA=${2:?"missing arg 2 for NEW_SHA"}
-NEW_COMMENT=${2:?"missing arg 3 for NEW_COMMENT"}
-COMMIT=${3:-false}
-PR=${4:-false}
-MESSAGE="Update terraform-static-analysis to ${NEW_COMMENT}"
-BRANCH_NAME="update-terraform-static-analysis-to-${NEW_COMMENT}"
+ORG=${1:?"missing arg 1 for ACTION"}
+TEAM=${2:?"missing arg 2 for ACTION"}
+ACTION=${3:?"missing arg 3 for ACTION"}
+NEW_SHA=${4:?"missing arg 4 for NEW_SHA"}
+NEW_COMMENT=${5:?"missing arg 5 for NEW_COMMENT"}
+COMMIT=${6:-false}
+PR=${7:-false}
+MESSAGE="Update ${ACTION} to ${NEW_COMMENT}"
+BRANCH_NAME="update-action-to-${NEW_COMMENT}"
 
-FILE=~/git/scripts/mp-repos.txt
+FILE="${TMPDIR}repos.txt"
+
+source get-repositories-by-team.sh "${ORG}" "${TEAM}" >"${FILE}"
 
 while read -r REPO; do
   source git-checkout-clean-main.sh "$REPO"
@@ -19,7 +23,7 @@ while read -r REPO; do
 
   wfdir=.github/workflows
   if [[ ! -d "$wfdir" ]]; then
-    print "No workflows directory found at: $REPO/$wfdir (skipping)"
+    echo "No workflows directory found at: $REPO/$wfdir (skipping)"
     continue
   fi
 
